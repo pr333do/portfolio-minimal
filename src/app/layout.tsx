@@ -1,7 +1,9 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import SceneProvider from '@/libs/three/components/SceneProvider'
+import localFont from 'next/font/local'
+import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ['latin'] })
+const satoshi = localFont({ src: '../@assets/fonts/Satoshi-Variable.woff2', display: 'swap' })
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,8 +16,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className='antialiased'>
+      <body className={satoshi.className}>
+        <SceneProvider>
+          {children}
+        </SceneProvider>
+        <Analytics/>
+      </body>
     </html>
   )
 }
